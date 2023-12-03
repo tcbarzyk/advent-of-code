@@ -4,39 +4,20 @@ import java.io.*;
 public class Day3Part1 {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner input = new Scanner(new File("day3/day3-input2.txt"));
-        /*
-        ..........
-        467..114.. true, false
-        ...*...... 
-        ..35..633. true, true
-        ......#...
-        617*...... true
-        .....+.58. false
-        ..592..... true
-        ......755. true
-        ...$.*....
-        .664.598.. true true
-        ..........
-         */
         ArrayList<String> lines = new ArrayList<String>();
         int sum = 0;
-
         while (input.hasNextLine()) {
             lines.add("." + input.nextLine() + ".");
         }
-
         input.close();
         
         for (int i = 1; i < lines.size()-1; i++) {
             ArrayList<Integer> numberStartIndexes = findNumberStartIndexes(lines.get(i));
             for (int index : numberStartIndexes) {
-                //System.out.println(index);
                 if (isValid(lines, i, index)) {
                     int num = Integer.parseInt(lines.get(i).substring(index, getEndIndex(lines.get(i), index)));
-                    //System.out.println(num);
                     sum += num;
                 }
-                //System.out.println(isValid(lines, i, index));
             }
         }
 
@@ -53,7 +34,6 @@ public class Day3Part1 {
                 return endIndex;
             }
         }
-
         return endIndex;
     }
 
@@ -70,7 +50,6 @@ public class Day3Part1 {
                 isNumber=false;
             }
         }
-
         return numberStartIndexes;
     }
 

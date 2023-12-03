@@ -4,27 +4,11 @@ import java.io.*;
 public class Day3Part2 {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner input = new Scanner(new File("day3/day3-input2.txt"));
-        /*
-        ..........
-        467..114.. true, false
-        ...*...... 
-        ..35..633. true, true
-        ......#...
-        617*...... true
-        .....+.58. false
-        ..592..... true
-        ......755. true
-        ...$.*....
-        .664.598.. true true
-        ..........
-         */
         ArrayList<String> lines = new ArrayList<String>();
         int sum = 0;
-
         while (input.hasNextLine()) {
             lines.add("." + input.nextLine() + ".");
         }
-
         input.close();
         
         for (int i = 1; i < lines.size()-1; i++) {
@@ -51,13 +35,13 @@ public class Day3Part2 {
 
     public static int findWholeNumber(String str, int someIndex) {
         int startIndex = 0, endIndex = 0;
-        for (int i = someIndex; i >= 0; i--) {
+        for (int i = someIndex-1; i >= 0; i--) {
             if (!Character.isDigit(str.charAt(i))) {
                 startIndex = i+1;
                 break;
             }
         }
-        for (int i = someIndex; i < str.length(); i++) {
+        for (int i = someIndex+1; i < str.length(); i++) {
             if (!Character.isDigit(str.charAt(i))) {
                 endIndex = i;
                 break;
@@ -85,7 +69,6 @@ public class Day3Part2 {
         if (Character.isDigit(lines.get(x).charAt(y+1))) { //right
             parts.add(findWholeNumber(lines.get(x), y+1));
         }
-
         if (Character.isDigit(lines.get(x).charAt(y-1))) { //left
             parts.add(findWholeNumber(lines.get(x), y-1));
         }
@@ -101,7 +84,6 @@ public class Day3Part2 {
                 parts.add(findWholeNumber(lines.get(x+1), y+1)); 
             }
         }
-
         return parts;
     }
 }
